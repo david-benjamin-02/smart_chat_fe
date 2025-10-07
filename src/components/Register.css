@@ -1,0 +1,128 @@
+/* Shared login links styling */
+.login-links {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-link {
+  color: #919293;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.login-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Wrapper for full-page center alignment */
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e9ecef;
+}
+
+/* Container box */
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  min-height: 520px; /* Ensures both steps appear equal in height */
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Header */
+.register-heading {
+  margin-bottom: 1.5rem;
+  color: #343a40;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+/* Form layout */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input fields */
+.register-input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-color: #fff;
+}
+
+/* Primary button */
+.register-button {
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+/* Secondary (back) button */
+.register-secondary-button {
+  padding: 12px;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.register-secondary-button:hover {
+  background-color: #5a6268;
+}
+
+/* Button row layout */
+.register-button-row {
+  display: flex;
+  justify-content: space-between; /* Aligns buttons to opposite ends */
+  margin-top: 1rem;
+}
+
+/* Message styling */
+.register-message {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* Entry animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

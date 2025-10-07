@@ -1,0 +1,33 @@
+.voice-chat-container {
+  display: flex;
+  align-items: center;
+}
+
+.voice-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voice-waveform {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.voice-button i {
+  z-index: 2;
+  font-size: 1.2rem;
+  color: #555;
+}
+.voice-canvas {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+}

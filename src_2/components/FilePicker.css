@@ -1,0 +1,61 @@
+.filepicker-icon {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  font-size: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+  border: 1px solid #ced4da;
+  color: #212529;
+  cursor: pointer;
+}
+
+.filepicker-dropdown {
+  position: absolute;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  z-index: 9999;
+  min-width: 160px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.filepicker-dropdown.upward {
+  bottom: 45px;
+  /* shows above the icon */
+}
+
+.filepicker-dropdown div {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.filepicker-dropdown div:hover {
+  background-color: #f1f1f1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.attachment-preview {
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
