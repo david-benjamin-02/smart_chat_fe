@@ -10,7 +10,7 @@ import AudioRecorder from './AudioRecorder';
 import DropDownMenu from './DropDownMenu';
 import ContactModal from './ContactModal';
 import SettingsModal from './SettingsModal';
-import { Socket } from 'socket.io-client';
+// import { Socket } from 'socket.io-client';
 import WaveformPlayer from './WaveformPlayer';
 import axios from 'axios';
 import VoiceChat from './VoiceChat';
@@ -21,10 +21,10 @@ export default function ChatApp() {
   const [contacts, setContacts] = useState([
   ]);
   const [unreadCounts, setUnreadCounts] = useState({});
-  const [socket, setSocket] = useState(null);
+  // const [socket, setSocket] = useState(null);
   const [typingUserId, setTypingUserId] = useState(null);
-  const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([]);
+  // const [message, setMessage] = useState("");
+  // const [chat, setChat] = useState([]);
   const uid = localStorage.getItem('uid');
   const sentReadReceiptsRef = useRef(new Set());
   const readSocketRef = useRef(null);
@@ -33,7 +33,7 @@ export default function ChatApp() {
   const [onlineUsers, setOnlineUsers] = useState(new Set());
   const [selectedContact, setSelectedContact] = useState(null);
   const [messages, setMessages] = useState({});
-  const [selectedCon, setSelectedCon] = useState(null);
+  // const [selectedCon, setSelectedCon] = useState(null);
   const [prefillContact, setPrefillContact] = useState(null);
   const recordingSentRef = useRef(false);
   const [input, setInput] = useState('');
@@ -46,15 +46,17 @@ export default function ChatApp() {
   const [showSettings, setShowSettings] = useState(false);
   const [pendingLangConfirm, setPendingLangConfirm] = useState(false);
   const [showTranslateIcons, setShowTranslateIcons] = useState(false);
-  const [isLanguageActive, setIsLanguageActive] = useState(false);
+  const [isLanguageActive] = useState(false);
+  // const [isLanguageActive, setIsLanguageActive] = useState(false);
   const [currentLangCode, setCurrentLangCode] = useState(() => {
     return localStorage.getItem('sender_lang') || 'en';
   });
 
   const [isTranslating, setIsTranslating] = useState(false);
   const clearLangHighlightRef = useRef(null);
-  const [isTranscribing, setIsTranscribing] = useState(false);
-  const [shouldTranslate, setShouldTranslate] = useState(false);
+  const [isTranscribing] = useState(false);
+  // const [isTranscribing, setIsTranscribing] = useState(false);
+  // const [shouldTranslate, setShouldTranslate] = useState(false);
   const [isMicActive, setIsMicActive] = useState(false); // mic state passed from AudioRecorder
   // default false
   const [settings, setSettings] = useState({
@@ -71,8 +73,9 @@ export default function ChatApp() {
     }));
   };
 
-  const [isVoiceChatActive, setIsVoiceChatActive] = useState(false);
-  const [isAudioRecorderActive, setIsAudioRecorderActive] = useState(false);
+  const [isVoiceChatActive] = useState(false);
+  // const [isVoiceChatActive, setIsVoiceChatActive] = useState(false);
+  // const [isAudioRecorderActive, setIsAudioRecorderActive] = useState(false);
   const [isVoiceChatRecording, setIsVoiceChatRecording] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const timerRef = useRef(null);
@@ -96,7 +99,7 @@ export default function ChatApp() {
 
     const fetchSettings = async () => {
       try {
-        const res = await fetch(`http://127.0.0.1:8000/get-settings/${uid}`);
+        const res = await fetch(`http://127.0.0.1:8000/settings/${uid}`);
         const data = await res.json();
         const userSettings = data.settings;
 
@@ -145,7 +148,7 @@ export default function ChatApp() {
 
     const fetchInitialContacts = async () => {
       try {
-        const res = await axios.get(`http://${process.env.REACT_APP_API_BASE_URL}/get-user-contacts/${uid}`);
+        const res = await axios.get(`http://${process.env.REACT_APP_API_BASE_URL}/chat/user-contacts/${uid}`);
         setContacts(res.data.contacts);
 
         // ✅ Extract unread counts and update state
@@ -180,6 +183,7 @@ export default function ChatApp() {
 
 
     fetchInitialContacts();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -269,7 +273,8 @@ export default function ChatApp() {
       //   audioUrl: data.msg_type?.toLowerCase() === 'audio' ? null : undefined,
       //   status: 'sent'
       // };
-      const isAudio = data.msg_type?.toLowerCase() === 'audio';
+
+      // const isAudio = data.msg_type?.toLowerCase() === 'audio';//
       const transformed = data.transformation || {};
 
       const newMsg = {
@@ -297,7 +302,7 @@ export default function ChatApp() {
 
             if (!email) {
               try {
-                const res = await axios.get(`http://localhost:8000/get-user-email/${senderId}`);
+                const res = await axios.get(`http://localhost:8000/auth/user-email/${senderId}`);
                 email = res.data.email;
               } catch (err) {
                 console.error("❌ Failed to fetch email:", err);
@@ -388,6 +393,7 @@ export default function ChatApp() {
     };
 
     return () => socketRef.current?.close();
+    // eslint-disable-next-line
   }, [uid]);
 
   useEffect(() => {
@@ -539,7 +545,7 @@ export default function ChatApp() {
       formData.append("text", input);
       formData.append("language", currentLangCode);
 
-      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/translate`, {
+      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/utils/translate`, {
         method: "POST",
         body: formData,
       });
@@ -575,7 +581,7 @@ export default function ChatApp() {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const res = await axios.get(`http://${process.env.REACT_APP_API_BASE_URL}/get-user-contacts/${uid}`);
+        const res = await axios.get(`http://${process.env.REACT_APP_API_BASE_URL}/chat/user-contacts/${uid}`);
         setContacts(res.data.contacts);
       } catch (error) {
         console.error("Failed to fetch contacts", error);
@@ -583,6 +589,7 @@ export default function ChatApp() {
     };
 
     fetchContacts();
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     selectedContactRef.current = selectedContact;
@@ -615,11 +622,11 @@ export default function ChatApp() {
   }, [selectedContact, messages]);
 
 
-  const handleCancelTranslate = () => {
-    setShowTranslateIcons(false);
-    setPendingLangConfirm(false); // ✅ clear the block
-    // if (clearLangHighlightRef.current) clearLangHighlightRef.current(); // unhighlight the icon
-  };
+  // const handleCancelTranslate = () => {
+  //   setShowTranslateIcons(false);
+  //   setPendingLangConfirm(false); // ✅ clear the block
+  //   // if (clearLangHighlightRef.current) clearLangHighlightRef.current(); // unhighlight the icon
+  // };
 
   const handleSettingsSave = (updatedSettings) => {
     setSettings(updatedSettings);
@@ -701,6 +708,7 @@ export default function ChatApp() {
         );
       }
     } else {
+      // eslint-disable-next-line
       newMessageDisplay = messageText;
     }
 
@@ -814,7 +822,7 @@ export default function ChatApp() {
     formData.append("file", blob, "voice.webm");
     console.log("formData,", formData)
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/upload-voice`, {
+      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/utils/upload-voice`, {
         method: "POST",
         body: formData,
       });

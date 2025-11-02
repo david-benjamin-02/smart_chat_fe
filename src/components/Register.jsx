@@ -259,7 +259,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(`http://${process.env.REACT_APP_API_BASE_URL}/register`, formData);
+      const response = await axios.post(`http://${process.env.REACT_APP_API_BASE_URL}/auth/register`, formData);
       setMessage(`✅ ${response.data.message}`);
       setTimeout(() => navigate("/settings", { state: { uid: response.data.user_id } }), 1500);
     } catch (error) {

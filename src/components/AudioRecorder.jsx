@@ -39,7 +39,7 @@ const AudioRecorder = ({ onSendAudio, onTranscription, setResetRef, onRecordingS
         mediaRecorder.onstop = async () => {
           setIsRecording(false);
           const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-          const audioUrl = URL.createObjectURL(audioBlob);
+          // const audioUrl = URL.createObjectURL(audioBlob);
 
           // if (onSendAudio) onSendAudio(audioUrl);
 
@@ -48,7 +48,7 @@ const AudioRecorder = ({ onSendAudio, onTranscription, setResetRef, onRecordingS
 
           try {
             setIsTranscribing(true); // ✅ START
-            const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/speech_to_text`, {
+            const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/utils/speech-to-text`, {
               method: 'POST',
               body: formData,
             });

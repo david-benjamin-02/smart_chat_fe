@@ -18,7 +18,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://${process.env.REACT_APP_API_BASE_URL}/login`, formData);
+      const res = await axios.post(`http://${process.env.REACT_APP_API_BASE_URL}/auth/login`, formData);
       alert("✅ Login successful!");
       localStorage.setItem("uid", res.data.user_id);
       localStorage.setItem("sender_lang", res.data.sender_lang);

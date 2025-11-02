@@ -22,7 +22,7 @@ export default function SettingsModal({ show, onClose, settings, onSave }) {
   //   if (show && uid) {
   //     const fetchSettings = async () => {
   //       try {
-  //         const res = await fetch(`http://127.0.0.1:8000/get-settings/${uid}`);
+  //         const res = await fetch(`http://127.0.0.1:8000/settings/${uid}`);
   //         const data = await res.json();
   //         const settings = data.settings;
 
@@ -54,7 +54,7 @@ export default function SettingsModal({ show, onClose, settings, onSave }) {
     };
 
     try {
-      const res = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/update-settings`, {
+      const res = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/settings/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

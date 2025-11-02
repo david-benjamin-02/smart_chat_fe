@@ -12,7 +12,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
   // Fetch all contacts when modal opens
   useEffect(() => {
     if (show && uid) {
-      fetch(`http://${process.env.REACT_APP_API_BASE_URL}/get-contacts/${uid}`)
+      fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/${uid}`)
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch contacts');
           return res.json();
@@ -34,7 +34,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
   const handleSave = async () => {
     if (newContact.name && newContact.email) {
       try {
-        const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/add-contact`, {
+        const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/add`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -54,7 +54,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
         alert(data.message);
 
         // Refresh contacts
-        const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/get-contacts/${uid}`);
+        const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/${uid}`);
         const refreshedData = await refreshed.json();
         setContacts(refreshedData.contacts);
 
@@ -69,7 +69,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
   // Fetch specific contact to edit
   const handleEditClick = async (contact) => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/get-contact/${uid}/${contact.contact_id}`);
+      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/detail/${uid}/${contact.contact_id}`);
       if (!response.ok) throw new Error('Failed to fetch contact');
       const data = await response.json();
       setEditingContact({ ...data, contact_id: contact.contact_id });
@@ -81,7 +81,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
   // Save edited contact name
   const handleEditSave = async () => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/edit-contact/${uid}/${editingContact.contact_id}`, {
+      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/edit/${uid}/${editingContact.contact_id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: editingContact.name }),
@@ -93,7 +93,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
         return;
       }
 
-      const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/get-contacts/${uid}`);
+      const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/${uid}`);
       const data = await refreshed.json();
       setContacts(data.contacts);
       setEditingContact(null);
@@ -105,7 +105,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
   // Delete contact
   const handleDeleteContact = async (contactId) => {
     try {
-      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/delete-contact/${uid}/${contactId}`, {
+      const response = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/delete/${uid}/${contactId}`, {
         method: 'DELETE',
       });
 
@@ -115,7 +115,7 @@ export default function ContactModal({ show, onClose, onAddContact, prefillConta
         return;
       }
 
-      const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/get-contacts/${uid}`);
+      const refreshed = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/contacts/${uid}`);
       const data = await refreshed.json();
       setContacts(data.contacts);
     } catch (err) {

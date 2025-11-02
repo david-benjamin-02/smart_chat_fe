@@ -30,7 +30,7 @@ const Settings = () => {
     console.log("Payload to be sent:", payload);  // <-- Add this too
 
     try {
-      const res = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/update-settings`, {
+      const res = await fetch(`http://${process.env.REACT_APP_API_BASE_URL}/settings/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

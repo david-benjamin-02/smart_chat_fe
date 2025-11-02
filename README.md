@@ -108,10 +108,10 @@ frontend/
 
 Your frontend communicates with the FastAPI backend endpoints like:
 
-* `POST /register`
-* `POST /login`
-* `GET /get-contacts/{uid}`
-* `POST /upload-voice`
+* `POST /auth/register`
+* `POST /auth/login`
+* `GET /contacts/{uid}`
+* `POST /utils/upload-voice`
 * WebSocket: `ws://127.0.0.1:8000/ws/chat/{sender_id}`
 
 ---
